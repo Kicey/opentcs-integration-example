@@ -10,3 +10,5 @@ include 'openTCS-Example-KernelExtension-Statistics'
 include 'openTCS-Example-ModelEditor'
 include 'openTCS-Example-OperationsDesk'
 include 'openTCS-Example-OperationsDesk-Panel-Statistics'
+include 'openTCS-Distributed-Hello'
+
