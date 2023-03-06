@@ -1,19 +1,18 @@
-plugins {
-    id 'java'
-}
-
-group 'site.kicey'
-version '0.1.0-SNAPSHOT'
-
-repositories {
-    mavenCentral()
-}
+apply from: "${rootDir}/gradle/dependency-versions.gradle"
+apply from: "${rootDir}/gradle/java-project.gradle"
+apply from: "${rootDir}/gradle/java-artifacts.gradle"
+apply from: "${rootDir}/gradle/java-codequality.gradle"
+apply from: "${rootDir}/gradle/guice-project.gradle"
+apply from: "${rootDir}/gradle/license-headers.gradle"
+apply plugin: 'org.kordamp.gradle.stats'
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+  implementation project(':openTCS-Example-Common')
+
+  implementation group: 'org.opentcs', name: 'opentcs-api-injection', version: openTcsBaselineVersion
+  implementation group: 'org.opentcs', name: 'opentcs-common', version: openTcsBaselineVersion
 }
 
-test {
-    useJUnitPlatform()
+task release {
+  dependsOn build
 }
