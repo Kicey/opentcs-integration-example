@@ -20,11 +20,19 @@ apply plugin: 'base'
 apply plugin: 'distribution'
 apply plugin: 'groovy'
 apply plugin: 'org.barfuin.gradle.jacocolog'
+apply plugin: 'idea'
 
 apply from: "${rootDir}/gradle/common.gradle"
 apply from: "${rootDir}/gradle/publishing-common.gradle"
 
 evaluationDependsOnChildren()
+
+idea {
+  module {
+    downloadJavadoc = true
+    downloadSources = true
+  }
+}
 
 repositories {
   mavenLocal()
@@ -119,9 +127,9 @@ build {
 // tag::cloneTask
 task cloneProject(type: JavaExec) {
   main = 'org.opentcs.scripts.CloneScript'
- 
+
   classpath = sourceSets.main.runtimeClasspath
- 
+
   def integrationName = 'MyCustomProject'
   def classPrefix = 'Custom'
   def packageName = 'com.example'
@@ -134,7 +142,7 @@ task cloneProject(type: JavaExec) {
   if (project.hasProperty('packageName')) {
     packageName = project.getProperty('packageName')
   }
-  
+
   // Pass command-line argument to script, if any.
   args integrationName, classPrefix, packageName
 }
